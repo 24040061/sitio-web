@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi primera aplicacion</title>
+  <style>
+
+    body {
+      font-family: "mi fuente", sans-serif;
+      margin: 0;
+      background-color: #A67B5B;
+    }
+
+    /* parte de ariba */
+    header {
+      background-color: rgb(53, 46, 37);
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    /* Historias */
+    .stories {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      overflow-x: auto;
+      background-color: rgb(235, 189, 158);
+
+    }
+    .story {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: rgb(247, 219, 210);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .story:hover {
+      transform: scale(1.1);
+    }
+
+    /* Publicaciones */
+    .post {
+      background-color: white;
+      margin: 15px auto;
+      width: 90%;
+      max-width: 400px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .post-header {
+      padding: 10px;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+    }
+    .post img {
+      width: 100%;
+      display: block;
+    }
+    .post .caption {
+      padding: 10px;
+    }
+
+    /* Botón de me gusta */
+    .like-btn {
+      padding: 10px;
+      cursor: pointer;
+      color: #888;
+      font-weight: bold;
+    }
+    .like-btn.liked {
+      color: red;
+    }
+
+    /* Comentarios */
+    .comments {
+      padding: 0 10px 10px 10px;
+      font-size: 14px;
+      color: #555;
+    }
+    .comment {
+      margin-top: 5px;
+    }
+
+    /* Pie de página */
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      background: white;
+      border-top: 1px solid #ddd;
+      font-size: 14px;
+      color: #666;
+    }
+    footer a {
+      margin: 0 5px;
+      text-decoration: none;
+      color: #0066cc;
+      cursor: pointer;
+    }
+
+    /* Modal de historia */
+    .story-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      z-index: 1000;
+    }
+    .story-modal img {
+      max-width: 90%;
+      max-height: 70%;
+      border-radius: 10px;
+    }
+    .close-btn {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background: #ff4444;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Perfil */
+    #profile, #search, #userProfile {
+      display: none;
+      padding: 20px;
+    }
+    .profile-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .profile-header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+    }
+    .profile-header h2 {
+      margin: 10px 0 5px 0;
+    }
+    .profile-header p {
+      color: #555;
+    }
+    .profile-posts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+    .profile-posts img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    /* Buscador */
+    #search input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .user-list {
+      list-style: none;
+      padding: 0;
+    }
+    .user-list li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+    .user-list li:hover {
+      background: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <header>PEQUEÑA RED SOCIAL</header>
+
+  <!-- Sección Feed -->
+  <div id="feed">
+    <div class="stories">
+      <div class="story" data-user="Ana" data-img="imageness/zabdiel.jpg">Ana</div>
+      <div class="story" data-user="Luis" data-img="imageness/macabro.jpg">Luis</div>
+      <div class="story" data-user="Mia" data-img="imageness/xd.jpg">Mia</div>
+      <div class="story" data-user="Juan" data-img="imageness/q.jpg">Juan</div>
+    </div>
+
+    <div class="post">
+      <div class="post-header">Ana</div>
+      <img src="https://picsum.photos/400/250?random=1" alt="foto de Ana">
+      <div class="caption">Disfrutando un día soleado 🌞</div>
+      <div class="like-btn">❤️ Me gusta</div>
+      <div class="comments">
+        <div class="comment"><b>Luis:</b> Qué bonita foto bro</div>
+        <div class="comment"><b>Mia:</b> Me encanta :v</div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-header">Luis</div>
+      <img src="https://picsum.photos/400/250?random=2" alt="foto de Luis">
+      <div class="caption">Probando mi nueva cámara 📸</div>
+      <div class="like-btn">❤️ Me gusta</div>
+      <div class="comments">
+        <div class="comment"><b>Ana:</b> Súper calidad 👌</div>
+        <div class="comment"><b>Juan:</b> ¡Quiero una igual!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección Perfil Propio -->
+  <div id="profile">
+    <div class="profile-header">
+      <img src="https://picsum.photos/100?random=5" alt="Tu foto de perfil">
+      <h2>MAAX</h2>
+      <p>🌍 Amante de los viajes y la fotografía 📸</p>
+    </div>
+    <h3>Mis publicaciones</h3>
+    <div class="profile-posts">
+      <img src="https://picsum.photos/200?random=21" alt="post 1">
+      <img src="https://picsum.photos/200?random=22" alt="post 2">
+      <img src="https://picsum.photos/200?random=23" alt="post 3">
+      <img src="https://picsum.photos/200?random=24" alt="post 4">
+      <img src="https://picsum.photos/200?random=25" alt="post 5">
+      <img src="https://picsum.photos/200?random=26" alt="post 6">
+    </div>
+  </div>
+
+  <!-- Sección Buscador -->
+  <div id="search">
+    <h2>Buscar perfiles</h2>
+    <input type="text" id="searchInput" placeholder="Escribe un nombre...">
+    <ul class="user-list" id="userList">
+      <li data-user="Ana">Ana</li>
+      <li data-user="Luis">Luis</li>
+      <li data-user="Mia">Mia</li>
+      <li data-user="Juan">Juan</li>
+    </ul>
+  </div>
+
+  <!-- Sección Perfil de otro usuario -->
+  <div id="userProfile"></div>
+
+  <!-- Modal de historias -->
+  <div class="story-modal" id="storyModal">
+    <h2 id="storyUser"></h2>
+    <img id="storyImage" src="" alt="Historia">
+    <button class="close-btn" id="closeStory">Cerrar</button>
+  </div>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>
+      <a id="goHome">Inicio</a> · 
+      <a id="goSearch">Buscar</a> · 
+      <a id="goProfile">Perfil</a>
+    </p>
+    <small>Mini Instagram © 2025</small>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    // Botón de me gusta
+    document.querySelectorAll(".like-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("liked");
+        btn.textContent = btn.classList.contains("liked") ? "❤️ Te gusta" : "❤️ Me gusta";
+      });
+    });
+
+    // Historias interactivas
+    const stories = document.querySelectorAll(".story");
+    const modal = document.getElementById("storyModal");
+    const storyUser = document.getElementById("storyUser");
+    const storyImage = document.getElementById("storyImage");
+    const closeBtn = document.getElementById("closeStory");
+
+    stories.forEach(story => {
+      story.addEventListener("click", () => {
+        storyUser.textContent = story.getAttribute("data-user");
+        storyImage.src = story.getAttribute("data-img");
+        modal.style.display = "flex";
+      });
+    });
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.style.display = "none"; });
+
+    // Navegación
+    const feed = document.getElementById("feed");
+    const profile = document.getElementById("profile");
+    const search = document.getElementById("search");
+    const userProfile = document.getElementById("userProfile");
+
+    document.getElementById("goHome").addEventListener("click", () => {
+      feed.style.display = "block"; profile.style.display = "none"; search.style.display = "none"; userProfile.style.display = "none";
+    });
+    document.getElementById("goProfile").addEventListener("click", () => {
+      feed.style.display = "none"; profile.style.display = "block"; search.style.display = "none"; userProfile.style.display = "none";
+    });
+    document.getElementById("goSearch").addEventListener("click", () => {
+      feed.style.display = "none"; profile.style.display = "none"; search.style.display = "block"; userProfile.style.display = "none";
+    });
+
+    // Buscador de usuarios
+    const searchInput = document.getElementById("searchInput");
+    const userList = document.getElementById("userList").getElementsByTagName("li");
+
+    searchInput.addEventListener("input", () => {
+      const filter = searchInput.value.toLowerCase();
+      for (let user of userList) {
+        const text = user.textContent.toLowerCase();
+        user.style.display = text.includes(filter) ? "block" : "none";
+      }
+    });
+
+    // Datos de perfiles
+    const perfiles = {
+      "Ana": { bio: "🌸 Amante de la naturaleza", img: "https://picsum.photos/100?random=31", posts: [32,33,34] },
+      "Luis": { bio: "📸 Fotógrafo en progreso", img: "https://picsum.photos/100?random=35", posts: [36,37,38] },
+      "Mia": { bio: "🎶 Música y arte", img: "https://picsum.photos/100?random=39", posts: [40,41,42] },
+      "Juan": { bio: "⚽ Fan del fútbol", img: "https://picsum.photos/100?random=43", posts: [44,45,46] }
+    };
+
+    // Mostrar perfil al hacer clic
+    document.querySelectorAll("#userList li").forEach(user => {
+      user.addEventListener("click", () => {
+        const name = user.getAttribute("data-user");
+        const data = perfiles[name];
+        userProfile.innerHTML = `
+          <div class="profile-header">
+            <img src="${data.img}" alt="Foto de ${name}">
+            <h2>${name}</h2>
+            <p>${data.bio}</p>
+          </div>
+          <h3>Publicaciones</h3>
+          <div class="profile-posts">
+            ${data.posts.map(p => `<img src="https://picsum.photos/200?random=${p}">`).join("")}
+          </div>
+        `;
+        feed.style.display = "none"; profile.style.display = "none"; search.style.display = "none"; 
+        userProfile.style.display = "block";
+      });
+    });
+  </script>
+</body>
+</html>
+
+
